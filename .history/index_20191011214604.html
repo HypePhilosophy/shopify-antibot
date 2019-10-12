@@ -973,8 +973,6 @@
           k1 = this.x64Multiply(k1, c2);
           h1 = this.x64Xor(h1, k1);
       }
-      console.log('h1 ' + h1)
-      console.log('key length ' + key.length)
       return h1 = this.x64Xor(h1, [0, key.length]), h2 = this.x64Xor(h2, [0, key.length]), h1 = this.x64Add(h1, h2), h2 = this.x64Add(h2, h1), h1 = this.x64Fmix(h1), h2 = this.x64Fmix(h2), h1 = this.x64Add(h1, h2), h2 = this.x64Add(h2, h1), ("00000000" + (h1[0] >>> 0).toString(16)).slice(-8) + ("00000000" + (h1[1] >>> 0).toString(16)).slice(-8) + ("00000000" + (h2[0] >>> 0).toString(16)).slice(-8) + ("00000000" + (h2[1] >>> 0).toString(16)).slice(-8);
     }
   };
@@ -1099,7 +1097,6 @@
    */
   var text = function() {
     /** @type {!Element} */
-    //found in html
     var elem = document.querySelectorAll('[type="application/ld+json"]')[0];
     if (!elem) {
       return [];
@@ -1144,7 +1141,7 @@
   var out = void 0;
   var session_id = function() {
     if (window.Shopify) {
-      var align = function() {
+      var align = function(index) {
         /** @type {!Array<string>} */
         var deadPool = ("; " + document.cookie).split("; " + "cart" + "=");
         if (2 == deadPool.length) {
@@ -1153,11 +1150,11 @@
       } || start;
       return !align && window.Shopify.api && loginOutSubmit(), align || "none";
     }
-    return function() {
+    return function(sectionid, t) {
       /** @type {(Element|null)} */
-      var e = document.getElementById("sig-bt-api");
-      return e && e.getAttribute("data-order-session-id");
-    }
+      var e = document.getElementById(sectionid);
+      return e && e.getAttribute(t);
+    }("sig-bt-api", "data-order-session-id");
   }();
   /** @type {!Array} */
   var obj = [];
@@ -1326,10 +1323,8 @@
       }
     }, 3e3);
     (new Fingerprint2(options)).get(function(specialEventName, data) {
-      console.log('device id ' + specialEventName)
       /** @type {string} */
       event.id = specialEventName;
-      //special event name
       event.attributes = extend(data);
     });
     (function(event, prop, saveNotifs) {
