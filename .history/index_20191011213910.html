@@ -768,7 +768,7 @@
             _.push(I(e, t))
         },
         F = function() {
-            events = []
+            _ = []
         },
         D = void 0,
         N = 0,
@@ -804,8 +804,8 @@
                 }), document.addEventListener("visibilitychange", W, !!K && {
                     passive: !0
                 }), j(), D = setInterval(function() {
-                    if (events.length > 0 && N < 1) try {
-                        k(events, G, F)
+                    if (_.length > 0 && N < 1) try {
+                        k(_, G, F)
                     } catch (e) {
                         G()
                     }
@@ -832,7 +832,7 @@
                             H = T, e()
                         }, y > 0 && (n.timeout = y), n.open("GET", s + "/onload", !0), localStorage.getItem("ETag") && n.setRequestHeader(o, localStorage.getItem("ETag")), n.send()
                     }(G, function() {
-                        return k(events, G, F)
+                        return k(_, G, F)
                     })
                 })
         },

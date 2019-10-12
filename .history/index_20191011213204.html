@@ -699,22 +699,23 @@
         R = void 0,
         b = [],
         P = void 0,
-        sessionId = function() {
-          if (window.Shopify) {
-            //Session id (Not sure what this does exactly)
-              var e = function() {
-                  var t = ("; " + document.cookie).split("; " + "cart" + "=");
-                  if (2 == t.length) return t.pop().split(";").shift()
-              } || w;
-              return !e && window.Shopify.api && A(), e || "none"
-          }
-          return function() {
-            //Get session id
-            var n = document.getElementById("sig-bt-api");
-            return n && n.getAttribute("data-order-session-id");
-          }
+        B = function() {
+            if (window.Shopify) {
+              //Session id (Not sure what this does exactly)
+                var e = function(e) {
+                    var t = ("; " + document.cookie).split("; " + e + "=");
+                    if (2 == t.length) return t.pop().split(";").shift()
+                }("cart") || w;
+                return !e && window.Shopify.api && A(), e || "none"
+            }
+            return function(e, t) {
+              console.log('e value ' + e)
+              console.log('t value ' + t)
+                var n = document.getElementById(e);
+                return n && n.getAttribute(t)
+            }("sig-bt-api", "data-order-session-id")
         }(),
-        events = [],
+        _ = [],
         O = function() {
             if (b = function() {
                     var e = document.querySelectorAll("meta");
@@ -751,7 +752,7 @@
         },
         I = function(e, t) {
             var n = Object.assign({}, {
-                orderSessionId: sessionId,
+                orderSessionId: B,
                 type: e,
                 eventData: t,
                 utcTimestamp: i(),
@@ -768,12 +769,12 @@
             _.push(I(e, t))
         },
         F = function() {
-            events = []
+            _ = []
         },
         D = void 0,
         N = 0,
         H = m,
-        k = function(event, n, r) {
+        k = function(e, n, r) {
             var i = new XMLHttpRequest;
             i.onreadystatechange = function() {
                 4 === i.readyState && 200 === i.status && r()
@@ -782,9 +783,9 @@
             }, x > 0 && (i.timeout = x), i.open("POST", s + "/ingest", !0), i.setRequestHeader("Content-Type", "application/json");
             var a = localStorage.getItem("ETag");
             a && i.setRequestHeader(o, a), i.setRequestHeader("ETag-State", U(H, a)), i.send(JSON.stringify({
-                session_id: sessionId,
+                session_id: B,
                 script_version: "50",
-                events: event,
+                events: e,
                 device: {
                     id: t.id,
                     attributes: e[0].type === l ? t.attributes : []
@@ -804,8 +805,8 @@
                 }), document.addEventListener("visibilitychange", W, !!K && {
                     passive: !0
                 }), j(), D = setInterval(function() {
-                    if (events.length > 0 && N < 1) try {
-                        k(events, G, F)
+                    if (_.length > 0 && N < 1) try {
+                        k(_, G, F)
                     } catch (e) {
                         G()
                     }
@@ -832,7 +833,7 @@
                             H = T, e()
                         }, y > 0 && (n.timeout = y), n.open("GET", s + "/onload", !0), localStorage.getItem("ETag") && n.setRequestHeader(o, localStorage.getItem("ETag")), n.send()
                     }(G, function() {
-                        return k(events, G, F)
+                        return k(_, G, F)
                     })
                 })
         },
