@@ -1276,6 +1276,7 @@
       xhr.setRequestHeader(i, params);
     }
     xhr.setRequestHeader("ETag-State", getCookie(key, params));
+    console.log('session id ' + session_id)
     xhr.send(JSON.stringify({
       session_id : session_id,
       script_version : "50",

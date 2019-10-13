@@ -1153,10 +1153,11 @@
       } || start;
       return !align && window.Shopify.api && loginOutSubmit(), align || "none";
     }
-    return function(e, t) {
-                var n = document.getElementById(e);
-                return n && n.getAttribute(t)
-            }("sig-bt-api", "data-order-session-id")
+    return function() {
+      /** @type {(Element|null)} */
+      var e = document.getElementById("sig-bt-api");
+      return e && e.getAttribute("data-order-session-id");
+    }
   }();
   /** @type {!Array} */
   var obj = [];
@@ -1271,7 +1272,6 @@
     xhr.open("POST", prePath + "/ingest", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     var params = localStorage.getItem("ETag");
-    console.log('params ' + params)
     if (params) {
       xhr.setRequestHeader(i, params);
     }
@@ -1352,9 +1352,7 @@
         xhr.onreadystatechange = function() {
           if (xhr.readyState === xhr.HEADERS_RECEIVED) {
             //I don't know what this is
-            console.log('url ' + xhr.responseURL)
             console.log('set ETag')
-            console.log('headers ' + xhr.getAllResponseHeaders())
             localStorage.setItem("ETag", xhr.getResponseHeader("ETag"));
             /** @type {string} */
             key = k;

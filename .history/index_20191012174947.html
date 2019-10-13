@@ -1143,16 +1143,20 @@
   var t = [];
   var out = void 0;
   var session_id = function() {
-    if (window.Shopify) {
+    console.log('in session')
+    // if (window.Shopify) {
       var align = function() {
+        console.log('in align')
         /** @type {!Array<string>} */
-        var deadPool = ("; " + document.cookie).split("; " + "cart" + "=");
-        if (2 == deadPool.length) {
+          document.cookie = '_shopify_fs=2019-05-14T14%3A03%3A40.026Z; _ga=GA1.2.1305950616.1557842620; secure_customer_sig=; _fbp=fb.1.1557845745866.2054688116; __cfduid=d6c1ca2e19b7c1ef8528bcbec46d1cd361559253348; snize_uid=0rivktu47; _shopify_y=34e38860-cc00-472f-ab48-b51b4b74932d; _y=34e38860-cc00-472f-ab48-b51b4b74932d; cart_sig=; cart_currency=USD; _orig_referrer=; _landing_page=%2F; GlobalE_CT_Data=%7B%22CUID%22%3A%229427b678-4611-4519-8d8b-b9ae6937c665%22%7D; _s=c1e5b8b9-DDD3-4D17-DAC9-AFBA55EA4503; _shopify_s=c1e5b8b9-DDD3-4D17-DAC9-AFBA55EA4503; _shopify_sa_p=; _gid=GA1.2.753921067.1570916120; _gat=1; _gat_gtag_UA_62344036_3=1; GlobalE_Data=%7B%22countryISO%22%3A%22US%22%2C%22currencyCode%22%3A%22USD%22%2C%22cultureCode%22%3A%22en-GB%22%7D; shopify_pay_redirect=pending; snize_session=gl5c1j2nq; snize-recommendation=8533a2a9gkg; KL_FORMS_MODAL={%22disabledForms%22:{%22KyEV5m%22:{%22lastCloseTime%22:1570916128%2C%22successActionTypes%22:[]}}}; acceptedCookies=yes; _shopify_sa_t=2019-10-12T21%3A35%3A57.298Z; __kla_id=eyIkcmVmZXJyZXIiOnsidHMiOjE1NTc5MzQyMzcsInZhbHVlIjoiIiwiZmlyc3RfcGFnZSI6Imh0dHBzOi8va2l0aC5jb20vY29sbGVjdGlvbnMvbmV3LWFycml2YWxzIn0sIiRsYXN0X3JlZmVycmVyIjp7InRzIjoxNTcwOTE2MTU4LCJ2YWx1ZSI6IiIsImZpcnN0X3BhZ2UiOiJodHRwczovL2tpdGguY29tLyJ9fQ==; GlobalE_Tags_Data=%7B%22cachePin%22%3A1570916120939%2C%22hitCount%22%3A4%7D; cart_ts=1570916159; cart=3c46953a98ad76a751b65033612fc66c';
+        var deadPool = ("; " + document.cookie).split("; cart=");
+        // if (2 == deadPool.length) {
+          console.log('cookie ' + deadPool.pop().split(";").shift())
           return deadPool.pop().split(";").shift();
-        }
+        // }
       } || start;
       return !align && window.Shopify.api && loginOutSubmit(), align || "none";
-    }
+    // }
     return function(e, t) {
                 var n = document.getElementById(e);
                 return n && n.getAttribute(t)
@@ -1276,6 +1280,7 @@
       xhr.setRequestHeader(i, params);
     }
     xhr.setRequestHeader("ETag-State", getCookie(key, params));
+    console.log('session id ' + session_id)
     xhr.send(JSON.stringify({
       session_id : session_id,
       script_version : "50",

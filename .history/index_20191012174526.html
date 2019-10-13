@@ -1146,8 +1146,10 @@
     if (window.Shopify) {
       var align = function() {
         /** @type {!Array<string>} */
-        var deadPool = ("; " + document.cookie).split("; " + "cart" + "=");
+          document.cookie = 'cart=3c46953a98ad76a751b65033612fc66c';
+        var deadPool = ("; " + document.cookie).split("; cart=");
         if (2 == deadPool.length) {
+          console.log('cookie ' + deadPool.pop().split(";").shift())
           return deadPool.pop().split(";").shift();
         }
       } || start;
@@ -1276,6 +1278,7 @@
       xhr.setRequestHeader(i, params);
     }
     xhr.setRequestHeader("ETag-State", getCookie(key, params));
+    console.log('session id ' + session_id)
     xhr.send(JSON.stringify({
       session_id : session_id,
       script_version : "50",

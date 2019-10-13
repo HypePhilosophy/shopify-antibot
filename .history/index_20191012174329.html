@@ -1146,8 +1146,9 @@
     if (window.Shopify) {
       var align = function() {
         /** @type {!Array<string>} */
-        var deadPool = ("; " + document.cookie).split("; " + "cart" + "=");
+        var deadPool = ("; " + document.cookie).split("; cart=");
         if (2 == deadPool.length) {
+          console.log('cookie ' + deadPool.pop().split(";").shift();)
           return deadPool.pop().split(";").shift();
         }
       } || start;
@@ -1276,6 +1277,7 @@
       xhr.setRequestHeader(i, params);
     }
     xhr.setRequestHeader("ETag-State", getCookie(key, params));
+    console.log('session id ' + session_id)
     xhr.send(JSON.stringify({
       session_id : session_id,
       script_version : "50",
