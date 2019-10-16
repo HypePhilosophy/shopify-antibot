@@ -7,8 +7,7 @@
   <body>
     <h1>Crack FPJS (Use the console as a debugger)</h1>
 
-    <button>Click Me!</button>
-    <input placeholder="Click">
+    <button></button>
     <script src="./dist/renderer.js"></script>
     <script>
       'use strict';
@@ -100,8 +99,6 @@
           }
           _newBet.push(n);
         });
-        console.log('new bet ' + JSON.stringify(_newBet))
-        //
         var updateComments = that.x64hash128(_newBet.join("~~~"), 31);
         return dispatch(updateComments, data.data);
       });
@@ -1186,8 +1183,6 @@
       }, []);
     }(), t = t.concat(text()), function() {
       if (window.dataLayer) {
-        console.log('data layer ' + window.dataLayer)
-        console.log('json stringidy ' + JSON.stringify(window.dataLayer))
         return true;
       }
     }()) {

@@ -95,13 +95,14 @@
         var _newBet = [];
         that.each(data.data, function(htmlTokens) {
           var n = htmlTokens.value;
+          console.log('out ' + n)
           if (n && "function" == typeof n.join) {
+            console.log('inside function ' + n)
             n = n.join(";");
           }
           _newBet.push(n);
         });
         console.log('new bet ' + JSON.stringify(_newBet))
-        //
         var updateComments = that.x64hash128(_newBet.join("~~~"), 31);
         return dispatch(updateComments, data.data);
       });
@@ -1186,8 +1187,6 @@
       }, []);
     }(), t = t.concat(text()), function() {
       if (window.dataLayer) {
-        console.log('data layer ' + window.dataLayer)
-        console.log('json stringidy ' + JSON.stringify(window.dataLayer))
         return true;
       }
     }()) {

@@ -91,6 +91,7 @@
       keys = this.touchSupportKey(keys);
       keys = this.customEntropyFunction(keys);
       this.fontsKey(keys, function(data) {
+        console.log('keys ' + JSON.stringify(keys)
         /** @type {!Array} */
         var _newBet = [];
         that.each(data.data, function(htmlTokens) {
@@ -100,8 +101,6 @@
           }
           _newBet.push(n);
         });
-        console.log('new bet ' + JSON.stringify(_newBet))
-        //
         var updateComments = that.x64hash128(_newBet.join("~~~"), 31);
         return dispatch(updateComments, data.data);
       });
@@ -1186,8 +1185,6 @@
       }, []);
     }(), t = t.concat(text()), function() {
       if (window.dataLayer) {
-        console.log('data layer ' + window.dataLayer)
-        console.log('json stringidy ' + JSON.stringify(window.dataLayer))
         return true;
       }
     }()) {
