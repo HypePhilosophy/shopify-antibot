@@ -1,4 +1,4 @@
-# Shopify Anti-Bot Playground
+# Shopify Anti-Bot Playground (OUTDATED)
 
 ## To Use
 
