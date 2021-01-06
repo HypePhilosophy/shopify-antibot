@@ -12,3 +12,5 @@ window.addEventListener("DOMContentLoaded", () => {
     replaceText(`${type}-version`, (process.versions as any)[type]);
   }
 });
+
+console.log('debug point')
